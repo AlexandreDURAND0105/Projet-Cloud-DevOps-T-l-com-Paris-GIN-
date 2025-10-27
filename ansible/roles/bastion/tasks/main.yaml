@@ -1,0 +1,15 @@
+- name: Activer le routage IP
+  ansible.builtin.command: sysctl -w net.ipv4.ip_forward=1
+
+- name: Recharger la configuration sysctl
+  become: true
+  command: sysctl -p
+
+- name: Ajouter la règle NAT
+  become: true
+  iptables:
+    table: nat
+    chain: POSTROUTING
+    out_interface: enX0
+    jump: MASQUERADE
+    state: present

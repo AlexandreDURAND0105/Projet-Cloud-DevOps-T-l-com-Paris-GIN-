@@ -1,0 +1,20 @@
+---
+- hosts: bastion
+  become: yes
+  roles:
+    - bastion
+  
+- hosts: loadbalancer
+  become: yes
+  roles:
+    - loadbalancer
+    
+- hosts: server-front
+  become: yes
+  roles:
+    - server-front
+
+- hosts: server-back
+  become: yes
+  roles:
+    - server-back
